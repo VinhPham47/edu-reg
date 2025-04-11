@@ -201,7 +201,7 @@ async def main():
         a = await page.find("Next")
         await a.click()
 
-        print("wait for 40 seconds...")
+        print("wait for 35 seconds...")
 
         await page.sleep(35)
         messages = list_messages(email_id)
