@@ -224,9 +224,6 @@ async def main():
         a = await page.find("Next")
         await a.click()
 
-        print("Solve recaptcha, you have 30 seconds!")
-        await page.sleep(30)
-
         a = await page.find("Create Account")
         await a.click()
 
