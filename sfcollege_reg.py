@@ -142,7 +142,6 @@ async def main():
         
 
         browser = await uc.start(
-            user_data_dir="/",
             lang="en-US"
         )
 
