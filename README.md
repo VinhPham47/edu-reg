@@ -7,4 +7,4 @@ Bước 3: Tạo API token tại mục API để sử dụng (thêm ít nhất 3
 
 **Lưu ý: trong lúc chạy tool nên đóng Chrome lại trước khi chạy.**
 
-Tool tự động nhảy qua recaptcha
+Tool tự động bỏ qua recaptcha
