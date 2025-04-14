@@ -127,264 +127,263 @@ def fake_profile(locale='en_US'):
     return profile
 
 async def main():
-    for _ in range(10):
-        new_email = create_email(generate_username(), "tempmail.id.vn")
+    new_email = create_email(generate_username(), "tempmail.id.vn")
 
-        email = new_email["data"]["email"]
-        email_id = new_email["data"]["id"]
-        print("temp mali:", email)
-        print("mail id:", email_id)
+    email = new_email["data"]["email"]
+    email_id = new_email["data"]["id"]
+    print("temp mali:", email)
+    print("mail id:", email_id)
 
-        profile = fake_profile()
-        profile2 = fake_profile()
-        passwordGen = generate_password(profile["first_name"])
-        print("password:", passwordGen)
-        
+    profile = fake_profile()
+    profile2 = fake_profile()
+    passwordGen = generate_password(profile["first_name"])
+    print("password:", passwordGen)
+    
 
-        browser = await uc.start(
-            lang="en-US"
-        )
+    browser = await uc.start(
+        lang="en-US"
+    )
 
-        page = await browser.get('https://ss2.sfcollege.edu/sr/AdmissionApplication/#/citizenship#top')
-        a = await page.find("United States")
-        await a.click()
+    page = await browser.get('https://ss2.sfcollege.edu/sr/AdmissionApplication/#/citizenship#top')
+    a = await page.find("United States")
+    await a.click()
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("First Time in College")
-        await a.click()
+    a = await page.find("First Time in College")
+    await a.click()
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("No Diploma")
-        await a.click()
+    a = await page.find("No Diploma")
+    await a.click()
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("input[id=fstNameSTR]")
-        await a.send_keys(profile["first_name"])
+    a = await page.find("input[id=fstNameSTR]")
+    await a.send_keys(profile["first_name"])
 
-        a = await page.find("input[id=lstNameSTR]")
-        await a.send_keys(profile["last_name"])
+    a = await page.find("input[id=lstNameSTR]")
+    await a.send_keys(profile["last_name"])
 
-        a = await page.find("select[id=month]")
-        await a.send_keys(profile["birthdate"].strftime('%b'))
+    a = await page.find("select[id=month]")
+    await a.send_keys(profile["birthdate"].strftime('%b'))
 
-        a = await page.find("select[id=day]")
-        await a.send_keys(str(profile["birthdate"].strftime("%d")))
+    a = await page.find("select[id=day]")
+    await a.send_keys(str(profile["birthdate"].strftime("%d")))
 
-        a = await page.find("select[id=year]")
-        await a.send_keys(str(profile["birthdate"].year))
+    a = await page.find("select[id=year]")
+    await a.send_keys(str(profile["birthdate"].year))
 
-        a = await page.find("input[name=emailAddrsSTR]")
-        await a.send_keys(email)
+    a = await page.find("input[name=emailAddrsSTR]")
+    await a.send_keys(email)
 
-        a = await page.find("input[name=cemailAddrsSTR]")
-        await a.send_keys(email)
+    a = await page.find("input[name=cemailAddrsSTR]")
+    await a.send_keys(email)
 
-        a = await page.find("select[name=birthctrySTR]")
-        await a.send_keys("United States Of America")
+    a = await page.find("select[name=birthctrySTR]")
+    await a.send_keys("United States Of America")
 
-        a = await page.find("input[id=ssn]")
-        await a.send_keys(profile["ssn"])
+    a = await page.find("input[id=ssn]")
+    await a.send_keys(profile["ssn"])
 
-        a = await page.find("input[id=ssnC]")
-        await a.send_keys(profile["ssn"])
+    a = await page.find("input[id=ssnC]")
+    await a.send_keys(profile["ssn"])
 
-        a = await page.find("label[for=ssnNoticeCB]")
-        await a.click()
+    a = await page.find("label[for=ssnNoticeCB]")
+    await a.click()
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        print("wait for 35 seconds...")
+    print("wait for 35 seconds...")
 
-        await page.sleep(35)
-        messages = list_messages(email_id)
-        readMsg = read_message(messages["data"]["items"][0]["id"])
-        code = extractCode(readMsg)
-        print("verify code:", code)
+    await page.sleep(35)
+    messages = list_messages(email_id)
+    readMsg = read_message(messages["data"]["items"][0]["id"])
+    code = extractCode(readMsg)
+    print("verify code:", code)
 
-        a = await page.find("input[id=tokenInput]")
-        await a.send_keys(str(code))
+    a = await page.find("input[id=tokenInput]")
+    await a.send_keys(str(code))
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("input[id=psdSTR]")
-        await a.send_keys(str(passwordGen))
+    a = await page.find("input[id=psdSTR]")
+    await a.send_keys(str(passwordGen))
 
-        a = await page.find("input[id=cpsdSTR]")
-        await a.send_keys(str(passwordGen))
+    a = await page.find("input[id=cpsdSTR]")
+    await a.send_keys(str(passwordGen))
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("Create Account")
-        await a.click()
+    a = await page.find("Create Account")
+    await a.click()
 
-        studentId = await page.find("strong[class=ng-binding]")
-        print(studentId.text)
+    studentId = await page.find("strong[class=ng-binding]")
+    print(studentId.text)
 
-        a = await page.find("Continue Your Application")
-        await a.click()
+    a = await page.find("Continue Your Application")
+    await a.click()
 
-        a = await page.find("select[name=countryCdSTR]")
-        await a.send_keys("United States Of America")
+    a = await page.find("select[name=countryCdSTR]")
+    await a.send_keys("United States Of America")
 
-        a = await page.find("input[id=street-name]")
-        await a.send_keys(str(profile["street"]))
+    a = await page.find("input[id=street-name]")
+    await a.send_keys(str(profile["street"]))
 
-        a = await page.find("input[id=city-name]")
-        await a.send_keys(str(profile["city"]))
+    a = await page.find("input[id=city-name]")
+    await a.send_keys(str(profile["city"]))
 
 
-        a = await page.find("select[name=stateCdSTR]")
-        await a.send_keys(str(profile["state"]))
+    a = await page.find("select[name=stateCdSTR]")
+    await a.send_keys(str(profile["state"]))
 
-        a = await page.find("input[id=zip-cd]")
-        await a.send_keys(str(profile["zip"]))
+    a = await page.find("input[id=zip-cd]")
+    await a.send_keys(str(profile["zip"]))
 
-        a = await page.find("input[id=primary-phone]")
-        await a.send_keys(str(profile["phone"]))
+    a = await page.find("input[id=primary-phone]")
+    await a.send_keys(str(profile["phone"]))
 
-        a = await page.find("input[id=emergency-phone]")
-        await a.send_keys(str(profile2["phone"]))
+    a = await page.find("input[id=emergency-phone]")
+    await a.send_keys(str(profile2["phone"]))
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("label[for=same-curr-add]")
-        await a.click()
+    a = await page.find("label[for=same-curr-add]")
+    await a.click()
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("input[id=first-name]")
-        await a.send_keys(str(profile2["first_name"]))
+    a = await page.find("input[id=first-name]")
+    await a.send_keys(str(profile2["first_name"]))
 
-        a = await page.find("input[id=last-name]")
-        await a.send_keys(str(profile2["last_name"]))
+    a = await page.find("input[id=last-name]")
+    await a.send_keys(str(profile2["last_name"]))
 
-        a = await page.find("select[id=relationship]")
-        await a.send_keys("Parent")
+    a = await page.find("select[id=relationship]")
+    await a.send_keys("Parent")
 
-        a = await page.find("label[for=samePermAdd]")
-        await a.click()
+    a = await page.find("label[for=samePermAdd]")
+    await a.click()
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("select[name=hsCountryNamSTR]")
-        await a.send_keys("United States Of America")
+    a = await page.find("select[name=hsCountryNamSTR]")
+    await a.send_keys("United States Of America")
 
-        a = await page.find("select[name=hsStateNamSTR]")
-        await a.send_keys(str(profile["state"]))
+    a = await page.find("select[name=hsStateNamSTR]")
+    await a.send_keys(str(profile["state"]))
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("select[name=firstTermCdSTR]")
-        await a.send_keys("Fall")
+    a = await page.find("select[name=firstTermCdSTR]")
+    await a.send_keys("Fall")
 
-        a = await page.find("select[name=firstYrNumSTR]")
-        await a.send_keys("2025")
+    a = await page.find("select[name=firstYrNumSTR]")
+    await a.send_keys("2025")
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("select[name=degreeSelect]")
-        await a.send_keys("Adult Basic Education")
+    a = await page.find("select[name=degreeSelect]")
+    await a.send_keys("Adult Basic Education")
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        await page.sleep(1)
+    await page.sleep(1)
 
 
-        a = await page.find("Yes")
-        await a.click()
+    a = await page.find("Yes")
+    await a.click()
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("label[for=disciplinaryViolenceIndNo]")
-        await a.click()
+    a = await page.find("label[for=disciplinaryViolenceIndNo]")
+    await a.click()
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find_all("button[type=submit]")# button[type=submit]
-        await a[2].click()
+    a = await page.find_all("button[type=submit]")# button[type=submit]
+    await a[2].click()
 
 
-        a = await page.find("select[name=educationSelect1]")
-        await a.send_keys("Unknown")
+    a = await page.find("select[name=educationSelect1]")
+    await a.send_keys("Unknown")
 
-        a = await page.find("select[name=educationSelect2]")
-        await a.send_keys("Unknown")
+    a = await page.find("select[name=educationSelect2]")
+    await a.send_keys("Unknown")
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("select[name=statusSelect]")
-        await a.send_keys("No Military History")
+    a = await page.find("select[name=statusSelect]")
+    await a.send_keys("No Military History")
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        a = await page.find("select[name=genderCdSTR]")
-        await a.send_keys(str(profile["gender"]))
+    a = await page.find("select[name=genderCdSTR]")
+    await a.send_keys(str(profile["gender"]))
 
-        a = await page.find("select[id=ethnicity]")
-        await a.send_keys("Prefer not to answer")
+    a = await page.find("select[id=ethnicity]")
+    await a.send_keys("Prefer not to answer")
 
-        a = await page.find("label[for=white]")
-        await a.click()
+    a = await page.find("label[for=white]")
+    await a.click()
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("Next")
-        await a.click()
+    a = await page.find("Next")
+    await a.click()
 
-        await page.sleep(1)
+    await page.sleep(1)
 
-        a = await page.find("Agree and Submit")
-        await a.click()
+    a = await page.find("Agree and Submit")
+    await a.click()
 
 
-        a = await page.find("Continue")
-        await a.click()
-        
-        with open("info.txt", "a") as f:
-            f.write(f"{email}\n{email_id}\n{studentId.text}\n{passwordGen}\n---------------\n")
+    a = await page.find("Continue")
+    await a.click()
+    
+    with open("info.txt", "a") as f:
+        f.write(f"{email}\n{email_id}\n{studentId.text}\n{passwordGen}\n---------------\n")
 
-        print("Done!\n----------------")
+    print("Done!\n----------------")
 
-        await page.close()
+    await page.close()
 
 if __name__ == '__main__':
     uc.loop().run_until_complete(main())
-    # input("Enter to exit...")
+    input("Enter to exit...")
