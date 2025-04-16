@@ -145,58 +145,58 @@ async def main():
     )
 
     page = await browser.get('https://ss2.sfcollege.edu/sr/AdmissionApplication/#/citizenship#top')
-    a = await page.find("United States")
+    a = await page.find("United States", timeout=60)
     await a.click()
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
-    a = await page.find("First Time in College")
+    a = await page.find("First Time in College", timeout=60)
     await a.click()
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
-    a = await page.find("No Diploma")
+    a = await page.find("No Diploma", timeout=60)
     await a.click()
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
     a = await page.find("input[id=fstNameSTR]")
     await a.send_keys(profile["first_name"])
 
-    a = await page.find("input[id=lstNameSTR]")
+    a = await page.find("input[id=lstNameSTR]", timeout=60)
     await a.send_keys(profile["last_name"])
 
-    a = await page.find("select[id=month]")
+    a = await page.find("select[id=month]", timeout=60)
     await a.send_keys(profile["birthdate"].strftime('%b'))
 
-    a = await page.find("select[id=day]")
+    a = await page.find("select[id=day]", timeout=60)
     await a.send_keys(str(profile["birthdate"].strftime("%d")))
 
-    a = await page.find("select[id=year]")
+    a = await page.find("select[id=year]", timeout=60)
     await a.send_keys(str(profile["birthdate"].year))
 
-    a = await page.find("input[name=emailAddrsSTR]")
+    a = await page.find("input[name=emailAddrsSTR]", timeout=60)
     await a.send_keys(email)
 
-    a = await page.find("input[name=cemailAddrsSTR]")
+    a = await page.find("input[name=cemailAddrsSTR]", timeout=60)
     await a.send_keys(email)
 
-    a = await page.find("select[name=birthctrySTR]")
+    a = await page.find("select[name=birthctrySTR]", timeout=60)
     await a.send_keys("United States Of America")
 
-    a = await page.find("input[id=ssn]")
+    a = await page.find("input[id=ssn]", timeout=60)
     await a.send_keys(profile["ssn"])
 
-    a = await page.find("input[id=ssnC]")
+    a = await page.find("input[id=ssnC]", timeout=60)
     await a.send_keys(profile["ssn"])
 
-    a = await page.find("label[for=ssnNoticeCB]")
+    a = await page.find("label[for=ssnNoticeCB]", timeout=60)
     await a.click()
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
     print("wait for 35 seconds...")
@@ -207,174 +207,174 @@ async def main():
     code = extractCode(readMsg)
     print("verify code:", code)
 
-    a = await page.find("input[id=tokenInput]")
+    a = await page.find("input[id=tokenInput]", timeout=60)
     await a.send_keys(str(code))
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
-    a = await page.find("input[id=psdSTR]")
+    a = await page.find("input[id=psdSTR]", timeout=60)
     await a.send_keys(str(passwordGen))
 
-    a = await page.find("input[id=cpsdSTR]")
+    a = await page.find("input[id=cpsdSTR]", timeout=60)
     await a.send_keys(str(passwordGen))
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
-    a = await page.find("Create Account")
+    a = await page.find("Create Account", timeout=60)
     await a.click()
 
-    studentId = await page.find("strong[class=ng-binding]")
+    studentId = await page.find("strong[class=ng-binding]", timeout=60)
     print(studentId.text)
 
-    a = await page.find("Continue Your Application")
+    a = await page.find("Continue Your Application", timeout=60)
     await a.click()
 
-    a = await page.find("select[name=countryCdSTR]")
+    a = await page.find("select[name=countryCdSTR]", timeout=60)
     await a.send_keys("United States Of America")
 
-    a = await page.find("input[id=street-name]")
+    a = await page.find("input[id=street-name]", timeout=60)
     await a.send_keys(str(profile["street"]))
 
-    a = await page.find("input[id=city-name]")
+    a = await page.find("input[id=city-name]", timeout=60)
     await a.send_keys(str(profile["city"]))
 
 
-    a = await page.find("select[name=stateCdSTR]")
+    a = await page.find("select[name=stateCdSTR]", timeout=60)
     await a.send_keys(str(profile["state"]))
 
-    a = await page.find("input[id=zip-cd]")
+    a = await page.find("input[id=zip-cd]", timeout=60)
     await a.send_keys(str(profile["zip"]))
 
-    a = await page.find("input[id=primary-phone]")
+    a = await page.find("input[id=primary-phone]", timeout=60)
     await a.send_keys(str(profile["phone"]))
 
-    a = await page.find("input[id=emergency-phone]")
+    a = await page.find("input[id=emergency-phone]", timeout=60)
     await a.send_keys(str(profile2["phone"]))
 
     await page.sleep(1)
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
-    a = await page.find("label[for=same-curr-add]")
+    a = await page.find("label[for=same-curr-add]", timeout=60)
     await a.click()
 
     await page.sleep(1)
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
-    a = await page.find("input[id=first-name]")
+    a = await page.find("input[id=first-name]", timeout=60)
     await a.send_keys(str(profile2["first_name"]))
 
-    a = await page.find("input[id=last-name]")
+    a = await page.find("input[id=last-name]", timeout=60)
     await a.send_keys(str(profile2["last_name"]))
 
-    a = await page.find("select[id=relationship]")
+    a = await page.find("select[id=relationship]", timeout=60)
     await a.send_keys("Parent")
 
-    a = await page.find("label[for=samePermAdd]")
+    a = await page.find("label[for=samePermAdd]", timeout=60)
     await a.click()
 
     await page.sleep(1)
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
-    a = await page.find("select[name=hsCountryNamSTR]")
+    a = await page.find("select[name=hsCountryNamSTR]", timeout=60)
     await a.send_keys("United States Of America")
 
-    a = await page.find("select[name=hsStateNamSTR]")
+    a = await page.find("select[name=hsStateNamSTR]", timeout=60)
     await a.send_keys(str(profile["state"]))
 
     await page.sleep(1)
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
-    a = await page.find("select[name=firstTermCdSTR]")
+    a = await page.find("select[name=firstTermCdSTR]", timeout=60)
     await a.send_keys("Fall")
 
-    a = await page.find("select[name=firstYrNumSTR]")
+    a = await page.find("select[name=firstYrNumSTR]", timeout=60)
     await a.send_keys("2025")
 
     await page.sleep(1)
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
-    a = await page.find("select[name=degreeSelect]")
+    a = await page.find("select[name=degreeSelect]", timeout=60)
     await a.send_keys("Adult Basic Education")
 
     await page.sleep(1)
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
     await page.sleep(1)
 
 
-    a = await page.find("Yes")
+    a = await page.find("Yes", timeout=60)
     await a.click()
 
     await page.sleep(1)
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
     await page.sleep(1)
 
-    a = await page.find("label[for=disciplinaryViolenceIndNo]")
+    a = await page.find("label[for=disciplinaryViolenceIndNo]", timeout=60)
     await a.click()
 
     await page.sleep(1)
 
-    a = await page.find_all("button[type=submit]")# button[type=submit]
+    a = await page.find_all("button[type=submit]", timeout=60)
     await a[2].click()
 
 
-    a = await page.find("select[name=educationSelect1]")
+    a = await page.find("select[name=educationSelect1]", timeout=60)
     await a.send_keys("Unknown")
 
-    a = await page.find("select[name=educationSelect2]")
+    a = await page.find("select[name=educationSelect2]", timeout=60)
     await a.send_keys("Unknown")
 
     await page.sleep(1)
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
-    a = await page.find("select[name=statusSelect]")
+    a = await page.find("select[name=statusSelect]", timeout=60)
     await a.send_keys("No Military History")
 
     await page.sleep(1)
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
-    a = await page.find("select[name=genderCdSTR]")
+    a = await page.find("select[name=genderCdSTR]", timeout=60)
     await a.send_keys(str(profile["gender"]))
 
-    a = await page.find("select[id=ethnicity]")
+    a = await page.find("select[id=ethnicity]", timeout=60)
     await a.send_keys("Prefer not to answer")
 
-    a = await page.find("label[for=white]")
+    a = await page.find("label[for=white]", timeout=60)
     await a.click()
 
     await page.sleep(1)
 
-    a = await page.find("Next")
+    a = await page.find("Next", timeout=60)
     await a.click()
 
     await page.sleep(1)
 
-    a = await page.find("Agree and Submit")
+    a = await page.find("Agree and Submit", timeout=60)
     await a.click()
 
 
-    a = await page.find("Continue")
+    a = await page.find("Continue", timeout=60)
     await a.click()
     
     with open("info.txt", "a") as f:
