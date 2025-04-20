@@ -6,7 +6,7 @@ import string
 import requests
 
 BASE_URL = 'https://tempmail.id.vn/api'
-TOKEN = 'tempmail_token'  # Replace with your actual token
+TOKEN = '389|ZjHgeTY1u72A0ZvaahE9f31k9bkd5lp5w8dvSVEUb13272f4'  # Replace with your actual token
 HEADERS = {
     'Authorization': f'Bearer {TOKEN}',
     'Accept': 'application/json',
